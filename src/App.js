@@ -28,13 +28,22 @@ class App extends Component {
 
   //API
   componentDidMount() {
-    api
-      .get("/all/")
-      .then((res) => {
-      this.setState({ 
-        countriesData: res.data 
-      });
+    this.loadCountries();
+    this.dataTheme();
+
+  };
+
+  loadCountries = async () => {
+    const res = await api.get("/all/");
+
+    console.log("API response:", res);
+    
+    this.setState({ 
+      countriesData: res.data 
     });
+  };
+
+  dataTheme = () => {
     document
     .getElementsByTagName("HTML")[0]
     .setAttribute("data-theme", localStorage.getItem("theme"));
