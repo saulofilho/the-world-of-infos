@@ -30,14 +30,11 @@ class App extends Component {
   componentDidMount() {
     this.loadCountries();
     this.dataTheme();
-
   };
 
   loadCountries = async () => {
     const res = await api.get("/all/");
-
-    console.log("API response:", res);
-    
+    // console.log("API response:", res);
     this.setState({ 
       countriesData: res.data 
     });
@@ -82,7 +79,7 @@ class App extends Component {
   };
 
   changeRegion = e => {
-    this.setState({region: e.value});
+    this.setState({ region: e.value });
   };
   
   //Render
@@ -129,7 +126,8 @@ class App extends Component {
                       'label': country.region
                     }
                   }), 'label')}
-                  onChange={this.changeRegion} value={this.state.value}
+                  onChange={this.changeRegion} 
+                  value={this.state.value}
                   placeholder="Filter by Region"
                   styles={Select}
                 />
@@ -138,7 +136,7 @@ class App extends Component {
             <DivGrid>
               <Grid>
                 { filteredCountries.map(country => (
-                  <li key={ country.alpha3Code }>
+                  <li key={ country.name }>
                     <Link to={"/" + country.name } >
                       <CountryCard country={ country } />
                     </Link>

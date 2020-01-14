@@ -29,8 +29,10 @@ class CountryPage extends Component {
     this.setState({
       id: id
     });
-    api.get("/name/" + id).then(res => {
-      console.log("Payload Country Page:", res);
+    api
+      .get("/name/" + id)
+      .then(res => {
+      // console.log("Payload Country Page:", res);
       this.setState({
         countryData: res.data
       });
@@ -86,10 +88,10 @@ class CountryPage extends Component {
         </Forms>
         <MainDiv>
           <CountryInfos>
-            {countryData.map(singleCountry => {
+            { countryData.map(singleCountry => {
               return (
-                <ul>
-                  <li key={singleCountry.nameLista}>
+                <ul key={singleCountry.name}>
+                  <li>
                     <div >
                       <img
                         src={singleCountry.flag}
@@ -97,7 +99,7 @@ class CountryPage extends Component {
                       />
                     </div>
                   </li>
-                  <li key={singleCountry.nameListaDois}>
+                  <li>
                     <GridText>
                       <Title16>
                         {singleCountry.name}
@@ -126,14 +128,14 @@ class CountryPage extends Component {
                         </p>
                         {singleCountry.currencies.map(curenciesName => {
                           return (
-                            <p>
+                            <p key={curenciesName.name}>
                               <span>Currencies: </span> {curenciesName.name}
                             </p>
                           );
                         })}
                         {singleCountry.languages.map(languagesName => {
                           return (
-                            <p>
+                            <p key={languagesName.name}>
                               <span>Languages: </span> {languagesName.name}
                             </p>
                           );
@@ -147,8 +149,10 @@ class CountryPage extends Component {
                               return (
                                 <BorderStyle
                                   href={"/" + bordersCountries}
+                                  key={bordersCountries}
                                 >
-                                  {bordersCountries}{" "}
+                                  {bordersCountries}
+                                  {" "}
                                 </BorderStyle>
                               );
                             })}
